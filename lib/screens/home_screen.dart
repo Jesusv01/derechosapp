@@ -8,6 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[900],
         appBar: AppBar(
           title: const Text('Inicio'),
           actions: [
@@ -17,10 +18,11 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         body: SingleChildScrollView(
+          
           child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [DerechosCard()]),
+              children:  const [DerechosCard()]),
         ));
   }
 }

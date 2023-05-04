@@ -1,4 +1,5 @@
 import 'package:derechos_app/providers/derechos_provider.dart';
+import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,18 +25,14 @@ class DerechoSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     // TODO: implement buildResults
-    return Text('BuildActions');
+    return Text('');
   }
 
   Widget _emptyContainer() {
     return Container(
       child: const Center(
-        child: Icon(
-          Icons.hourglass_empty_outlined,
-          color: Colors.black38,
-          size: 100,
-        ),
-      ),
+          child: Text('No se encontraton resultados',
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 17))),
     );
   }
 
@@ -55,37 +52,38 @@ class DerechoSearchDelegate extends SearchDelegate {
 
           final data = snapshot.data;
 
-          List filterList =
-          data.where((persona) => persona['nombre'].toLowerCase().contains(query.toLowerCase()) ? true : false).toList();
+          List filterList = data
+              .where((persona) =>
+                  removeDiacritics(persona['nombre']).toLowerCase().contains(removeDiacritics(query.toLowerCase()))
+                      ? true
+                      : false)
+              .toList();
 
-          if(filterList.isEmpty) return _emptyContainer();
+          List result = filterList.isNotEmpty
+              ? filterList
+              : data
+                  .where((persona) => removeDiacritics(persona['descripcion'])
+                          .toLowerCase()
+                          .contains(removeDiacritics(query.toLowerCase()))
+                      ? true
+                      : false)
+                  .toList();
+
+          if (result.isEmpty) return _emptyContainer();
 
           return ListView.builder(
             shrinkWrap: true,
-            itemCount: filterList.length,
+            itemCount: result.length,
             itemBuilder: (BuildContext context, int index) => ListTile(
-              title: Text(filterList[index]['nombre']),
+              title: Text(result[index]['nombre']),
               subtitle: Text(
-                filterList[index]['descripcion'],
+                result[index]['descripcion'],
                 overflow: TextOverflow.ellipsis,
               ),
-              onTap: () {
-                print(filterList[index]['nombre']);
-              },
+              onTap: () => Navigator.pushNamed(context, 'details',
+                  arguments: result[index]),
             ),
           );
         });
-
-    // }
   }
-
-// class _DerechosItem extends StatelessWidget {
-//   final String derecho;
-
-//   const _DerechosItem(this.derecho);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListTile();
-//   }
 }

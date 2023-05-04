@@ -5,63 +5,56 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final Object derecho =
-    //     ModalRoute.of(context)?.settings.arguments as Object;
-    // print(derecho);
+    final derechoMap = (ModalRoute.of(context)!.settings.arguments as Map);
+
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          _customAppBar(),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              _Overview(),
-              _Overview(),
-            ]),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class _customAppBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      backgroundColor: Colors.indigo,
-      expandedHeight: 200,
-      floating: false,
-      pinned: true,
-      flexibleSpace: FlexibleSpaceBar(
-        centerTitle: true,
-        titlePadding: const EdgeInsets.all(0),
-        title: Container(
-            width: double.infinity,
-            alignment: Alignment.bottomCenter,
-            color: Colors.black12,
-            child: const Text(
-              'derecho.title',
-              style: TextStyle(fontSize: 16),
-            )),
-        background: const FadeInImage(
-            image: NetworkImage(
-                'https://media.istockphoto.com/id/184986474/es/foto/bandera-de-el-salvador.jpg?s=612x612&w=0&k=20&c=kf-BaIDBvWEm_WzshNhCd_KG81zbog7DJqXNy4zr0ek='),
-            placeholder: AssetImage('assets/jar-loading.gif'),
-            fit: BoxFit.cover),
-      ),
-    );
-  }
-}
-
-class _Overview extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child: const Text(
-          'Tempor reprehenderit ad esse amet amet est tempor in deserunt esse est eu nulla. Duis dolore enim in duis culpa cupidatat minim pariatur eu. Duis eu elit est nulla. Consectetur aute fugiat qui commodo. Tempor duis officia officia nulla duis nisi enim reprehenderit nulla. Ex magna laborum amet tempor exercitation id reprehenderit. Do dolor qui commodo et do culpa velit consequat sunt. Laboris aliqua aliquip laboris nulla et consequat non enim occaecat ullamco nulla adipisicing incididunt. Nostrud dolor nostrud occaecat adipisicing minim esse non id. Dolor eu veniam anim excepteur.',
-          textAlign: TextAlign.justify,
-          // style: Theme.of(context).textTheme.subtitle1,
+        backgroundColor: Colors.blue[900],
+        appBar: AppBar(
+            // title: const Text('Inicio'),
+            ),
+        body: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              // width: 500,
+              // height: 400,
+              alignment: Alignment.center,
+              child: Container(
+                width: 300,
+                height: 330,
+                alignment: Alignment.center,
+                child: const Image(image: AssetImage('assets/NU-image.png')),
+              ),
+            ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(derechoMap['nombre'],
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 25,
+                      )),
+                ),
+                Container(
+                  width: 360,
+                  height: 2,
+                  color: Colors.white,
+                ),
+                Container(
+                  // constraints: const BoxConstraints(maxWidth: 280),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 20.0),
+                  child: Text(derechoMap['descripcion'],
+                      textAlign: TextAlign.center,
+                      style:
+                          const TextStyle(color: Colors.white, fontSize: 15)),
+                ),
+              ],
+            )
+          ],
         ));
   }
 }
