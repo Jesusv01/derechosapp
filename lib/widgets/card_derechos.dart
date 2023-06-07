@@ -34,7 +34,7 @@ class _DerechosCardState extends State<DerechosCard> {
           alignment: Alignment.center,
           child: Container(
             width: 400,
-            height: 230,
+            height: 200,
             alignment: Alignment.center,
             child: const Image(
                 image: AssetImage('assets/image_33262864.png'),
