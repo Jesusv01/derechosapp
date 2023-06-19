@@ -26,6 +26,7 @@ class DetailsScreen extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class _customAppBar extends StatelessWidget {
   final derecho;
   const _customAppBar(this.derecho);

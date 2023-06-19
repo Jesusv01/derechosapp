@@ -66,6 +66,7 @@ class _CustomCardType1State extends State<CustomCardType1> {
       itemCount: myList.length,
       itemBuilder: (BuildContext context, int index) {
       final item = myList[index];
+      // ignore: unnecessary_null_comparison
       return item != null ? ListTile(
         title: Text(item),
       ) : SizedBox();

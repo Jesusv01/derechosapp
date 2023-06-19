@@ -24,7 +24,6 @@ class DerechoSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
     return Text('');
   }
 
